@@ -1,0 +1,27 @@
+diff --git a/src/pool-cl/libraries/Tick.sol b/src/pool-cl/libraries/Tick.sol
+index cc5af59..4728b26 100644
+--- a/src/pool-cl/libraries/Tick.sol
++++ b/src/pool-cl/libraries/Tick.sol
+@@ -152,7 +152,10 @@ library Tick {
+ 
+         if (liquidityGrossAfter > maxLiquidity) revert TickLiquidityOverflow(tick);
+ 
+-        flipped = (liquidityGrossAfter == 0) != (liquidityGrossBefore == 0);
++        //equivalent to flipped = (liquidityGrossAfter == 0) != (liquidityGrossBefore == 0);
++        assembly ("memory-safe") {
++            flipped := xor(iszero(liquidityGrossBefore), iszero(liquidityGrossAfter))
++        }
+ 
+         if (liquidityGrossBefore == 0) {
+             // by convention, we assume that all growth before a tick was initialized happened _below_ the tick
+@@ -167,9 +170,7 @@ library Tick {
+ 
+         // update two members in one go
+         assembly ("memory-safe") {
+-            sstore(
+-                info.slot, or(and(liquidityGrossAfter, 0xffffffffffffffffffffffffffffffff), shl(128, liquidityNetAfter))
+-            )
++            sstore(info.slot, or(liquidityGrossAfter, shl(128, liquidityNetAfter)))
+         }
+     }
+ 

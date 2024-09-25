@@ -1,0 +1,14 @@
+diff --git a/src/pool-cl/interfaces/ICLPoolManager.sol b/src/pool-cl/interfaces/ICLPoolManager.sol
+index c1ac37b..e4fea7b 100644
+--- a/src/pool-cl/interfaces/ICLPoolManager.sol
++++ b/src/pool-cl/interfaces/ICLPoolManager.sol
+@@ -143,8 +143,8 @@ interface ICLPoolManager is IProtocolFees, IPoolManager, IExtsload {
+ 
+     struct SwapParams {
+         bool zeroForOne;
+-        int256 amountSpecified;
+         uint160 sqrtPriceLimitX96;
++        int256 amountSpecified;
+     }
+ 
+     /// @notice Swap against the given pool

@@ -1,0 +1,27 @@
+| src/pool-bin/BinPoolManager.sol:BinPoolManager contract |                 |        |        |         |         |
+|---------------------------------------------------------|-----------------|--------|--------|---------|---------|
+| Deployment Cost                                         | Deployment Size |        |        |         |         |
+| 5390147                                                 | 24792           |        |        |         |         |
+| Function Name                                           | min             | avg    | median | max     | # calls |
+| MAX_BIN_STEP                                            | 294             | 1094   | 294    | 2294    | 5       |
+| MIN_BIN_SHARE_FOR_DONATE                                | 458             | 2450   | 2458   | 2458    | 258     |
+| MIN_BIN_STEP                                            | 399             | 399    | 399    | 399     | 2       |
+| burn                                                    | 28992           | 70967  | 69804  | 264756  | 274     |
+| donate                                                  | 28844           | 34727  | 33446  | 186682  | 265     |
+| getBin                                                  | 2223            | 3337   | 3247   | 12319   | 84      |
+| getPosition                                             | 1312            | 1415   | 1312   | 3312    | 543     |
+| getSlot0                                                | 1127            | 1377   | 1127   | 3127    | 8       |
+| initialize                                              | 24171           | 156077 | 145414 | 243122  | 612     |
+| mint                                                    | 31162           | 278416 | 230142 | 7407313 | 569     |
+| owner                                                   | 607             | 678    | 607    | 2607    | 28      |
+| pause                                                   | 46845           | 46845  | 46845  | 46845   | 4       |
+| paused                                                  | 442             | 1013   | 442    | 2442    | 7       |
+| protocolFeeController                                   | 872             | 1872   | 1872   | 2872    | 2       |
+| protocolFeesAccrued                                     | 781             | 1923   | 2781   | 2781    | 21      |
+| setMaxBinStep                                           | 23775           | 25829  | 23825  | 29887   | 3       |
+| setMinBinSharesForDonate                                | 24075           | 24075  | 24075  | 24075   | 1       |
+| setProtocolFee                                          | 25905           | 28989  | 28267  | 32795   | 3       |
+| setProtocolFeeController                                | 30021           | 30031  | 30033  | 30033   | 8       |
+| swap                                                    | 26248           | 71977  | 67427  | 509277  | 276     |
+| transferOwnership                                       | 28996           | 28996  | 28996  | 28996   | 13      |
+| updateDynamicLPFee                                      | 23994           | 27847  | 24455  | 31256   | 515     |

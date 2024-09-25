@@ -1,0 +1,34 @@
+diff --git a/src/libraries/CustomRevert.sol b/src/libraries/CustomRevert.sol
+index fca6a39..d212551 100644
+--- a/src/libraries/CustomRevert.sol
++++ b/src/libraries/CustomRevert.sol
+@@ -7,21 +7,21 @@ pragma solidity ^0.8.0;
+ library CustomRevert {
+     /// @notice bubble up the revert message returned by a call and revert with the selector provided
+     /// @dev this function should only be used with custom errors of the type `CustomError(address target, bytes revertReason)`
++    /// @dev we know what we are doing and immediately revert thus we can use 0x00 even in memory-safe mode
+     function bubbleUpAndRevertWith(bytes4 selector, address addr) internal pure {
++        //FIXME
+         assembly ("memory-safe") {
+             let size := returndatasize()
+-            let fmp := mload(0x40)
+-
+             // Encode selector, address, offset, size, data
+-            mstore(fmp, selector)
+-            mstore(add(fmp, 0x04), addr)
+-            mstore(add(fmp, 0x24), 0x40)
+-            mstore(add(fmp, 0x44), size)
+-            returndatacopy(add(fmp, 0x64), 0, size)
++            mstore(0, selector)
++            mstore(add(0, 0x04), addr)
++            mstore(add(0, 0x24), 0x40)
++            mstore(add(0, 0x44), size)
++            returndatacopy(add(0, 0x64), 0, size)
+ 
+             // Ensure the size is a multiple of 32 bytes
+             let encodedSize := add(0x64, mul(div(add(size, 31), 32), 32))
+-            revert(fmp, encodedSize)
++            revert(0, encodedSize)
+         }
+     }
+ }
