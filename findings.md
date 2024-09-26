@@ -30,21 +30,7 @@ src/pool-bin/BinPositionManager.sol
 
 more efficent condition for reverting
 
-## 3_CLPool
-
-### repo
-
-pancake-v4-core
-
-### filename
-
-src/pool-cl/libraries/CLPool.sol
-
-### description
-
-Allow for better struct packing
-
-## 4_CLPoolManager
+## 3_CLPoolManager
 
 ### repo
 
@@ -58,7 +44,7 @@ src/pool-cl/CLPoolManager.sol
 
 Reorder conditions to place the cheaper, more likely one first for short-circuiting
 
-## 5_CLPosition
+## 4_CLPosition
 
 ### repo
 
@@ -72,7 +58,7 @@ src/pool-cl/libraries/CLPosition.sol
 
 Same as finding #1
 
-## 6_CustomRevert
+## 5_CustomRevert
 
 ### repo
 
@@ -86,7 +72,7 @@ pancake-v4-core
 
 Avoid loading fmp and write from 0x0 as we revert immediatly
 
-## 7_Pausable
+## 6_Pausable
 
 ### repo
 
@@ -99,7 +85,7 @@ src/base/Pausable.sol
 
 Use uint256 for cheaper execution gas for swap users
 
-## 8_PoolTicksCounter
+## 7_PoolTicksCounter
 
 ### repo
 
@@ -113,7 +99,7 @@ src/pool-cl/libraries/PoolTicksCounter.sol
 
 optimized arithmetic
 
-## 9_Tick
+## 8_Tick
 
 ### repo
 
@@ -127,7 +113,7 @@ src/pool-cl/libraries/Tick.sol
 
 Remove unneeded and
 
-## 10_Tick
+## 9_Tick
 
 ### repo
 
