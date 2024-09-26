@@ -8,7 +8,6 @@ index fca6a39..d212551 100644
      /// @dev this function should only be used with custom errors of the type `CustomError(address target, bytes revertReason)`
 +    /// @dev we know what we are doing and immediately revert thus we can use 0x00 even in memory-safe mode
      function bubbleUpAndRevertWith(bytes4 selector, address addr) internal pure {
-+        //FIXME
          assembly ("memory-safe") {
              let size := returndatasize()
 -            let fmp := mload(0x40)
