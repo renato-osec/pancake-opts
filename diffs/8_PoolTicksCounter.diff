@@ -1,0 +1,38 @@
+diff --git a/src/pool-cl/libraries/PoolTicksCounter.sol b/src/pool-cl/libraries/PoolTicksCounter.sol
+index 5d6e471..3d16039 100644
+--- a/src/pool-cl/libraries/PoolTicksCounter.sol
++++ b/src/pool-cl/libraries/PoolTicksCounter.sol
+@@ -53,15 +53,29 @@ library PoolTicksCounter {
+             // and we shouldn't count it.
+             uint256 bmAfter = self.getPoolBitmapInfo(key.toId(), wordPosAfter);
+             //uint256 bmAfter = PoolGetters.getTickBitmapAtWord(self, key.toId(), wordPosAfter);
+-            cache.tickAfterInitialized =
+-                ((bmAfter & (1 << bitPosAfter)) > 0) && ((tickAfter % tickSpacing) == 0) && (tickBefore > tickAfter);
++            //cache.tickAfterInitialized =
++            //    ((bmAfter & (1 << bitPosAfter)) > 0) && ((tickAfter % tickSpacing) == 0) && (tickBefore > tickAfter);
++
++            
++            assembly ("memory-safe") {
++                let shiftedBit := shl(bitPosAfter, 1)
++                let result := and(and(gt(and(bmAfter, shiftedBit), 0), iszero(smod(tickAfter, tickSpacing))), sgt(tickBefore, tickAfter))
++                mstore(add(cache,160), result)
++            }
+ 
+             // In the case where tickBefore is initialized, we only want to count it if we are swapping upwards.
+             // Use the same logic as above to decide whether we should count tickBefore or not.
+             uint256 bmBefore = self.getPoolBitmapInfo(key.toId(), wordPos);
+             //uint256 bmBefore = PoolGetters.getTickBitmapAtWord(self, key.toId(), wordPos);
+-            cache.tickBeforeInitialized =
+-                ((bmBefore & (1 << bitPos)) > 0) && ((tickBefore % tickSpacing) == 0) && (tickBefore < tickAfter);
++            //cache.tickBeforeInitialized =
++            //    ((bmBefore & (1 << bitPos)) > 0) && ((tickBefore % tickSpacing) == 0) && (tickBefore < tickAfter);
++            
++
++            assembly ("memory-safe") {
++                let shiftedBit := shl(bitPos, 1)
++                let result := and(and(gt(and(bmBefore, shiftedBit), 0), iszero(smod(tickBefore, tickSpacing))), slt(tickBefore, tickAfter))
++                mstore(add(cache,128), result)
++            }
+ 
+             if (wordPos < wordPosAfter || (wordPos == wordPosAfter && bitPos <= bitPosAfter)) {
+                 cache.wordPosLower = wordPos;

@@ -1,0 +1,28 @@
+diff --git a/src/pool-bin/BinPositionManager.sol b/src/pool-bin/BinPositionManager.sol
+index e412441..53b35ae 100644
+--- a/src/pool-bin/BinPositionManager.sol
++++ b/src/pool-bin/BinPositionManager.sol
+@@ -175,8 +175,21 @@ contract BinPositionManager is
+     }
+ 
+     function _addLiquidity(IBinPositionManager.BinAddLiquidityParams calldata params) internal {
+-        if (params.deltaIds.length != params.distributionX.length) revert InputLengthMismatch();
+-        if (params.deltaIds.length != params.distributionY.length) revert InputLengthMismatch();
++        //if (params.deltaIds.length != params.distributionX.length) revert InputLengthMismatch();
++        //if (params.deltaIds.length != params.distributionY.length) revert InputLengthMismatch();
++        
++        uint256 deltaLen = params.deltaIds.length;
++        uint256 lenX = params.distributionX.length;
++        uint256 lenY = params.distributionY.length;
++
++        assembly ("memory-safe") {
++            if iszero(and(eq(deltaLen, lenX), eq(deltaLen, lenY))) {
++                //revert InputLengthMismatch();
++                mstore(0, 0xaaad13f700000000000000000000000000000000000000000000000000000000)
++                revert(0, 4)
++            }
++        }
++
+         if (params.activeIdDesired > type(uint24).max || params.idSlippage > type(uint24).max) {
+             revert AddLiquidityInputActiveIdMismath();
+         }
