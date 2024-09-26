@@ -1,0 +1,18 @@
+diff --git a/src/pool-cl/CLPoolManager.sol b/src/pool-cl/CLPoolManager.sol
+index 01f99cf..174dfdb 100644
+--- a/src/pool-cl/CLPoolManager.sol
++++ b/src/pool-cl/CLPoolManager.sol
+@@ -123,11 +123,11 @@ contract CLPoolManager is ICLPoolManager, ProtocolFees, Extsload {
+     /// @inheritdoc ICLPoolManager
+     function modifyLiquidity(
+         PoolKey memory key,
+-        ICLPoolManager.ModifyLiquidityParams memory params,
++        ICLPoolManager.ModifyLiquidityParams calldata params,
+         bytes calldata hookData
+     ) external override returns (BalanceDelta delta, BalanceDelta feeDelta) {
+         // Do not allow add liquidity when paused()
+-        if (paused() && params.liquidityDelta > 0) revert PoolPaused();
++        if (params.liquidityDelta > 0 && paused()) revert PoolPaused();
+ 
+         PoolId id = key.toId();
+         CLPool.State storage pool = pools[id];

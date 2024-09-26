@@ -1,0 +1,15 @@
+diff --git a/src/pool-cl/libraries/Tick.sol b/src/pool-cl/libraries/Tick.sol
+index cc5af59..4728b26 100644
+--- a/src/pool-cl/libraries/Tick.sol
++++ b/src/pool-cl/libraries/Tick.sol
+@@ -167,9 +170,7 @@ library Tick {
+ 
+         // update two members in one go
+         assembly ("memory-safe") {
+-            sstore(
+-                info.slot, or(and(liquidityGrossAfter, 0xffffffffffffffffffffffffffffffff), shl(128, liquidityNetAfter))
+-            )
++            sstore(info.slot, or(liquidityGrossAfter, shl(128, liquidityNetAfter)))
+         }
+     }
+ 

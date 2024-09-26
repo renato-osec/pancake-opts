@@ -1,0 +1,40 @@
+diff --git a/src/pool-cl/libraries/CLPool.sol b/src/pool-cl/libraries/CLPool.sol
+index 3a07f3f..1d62864 100644
+--- a/src/pool-cl/libraries/CLPool.sol
++++ b/src/pool-cl/libraries/CLPool.sol
+@@ -90,10 +90,10 @@ library CLPool {
+         // the lower and upper tick of the position
+         int24 tickLower;
+         int24 tickUpper;
++        int24 tickSpacing;
+         // any change in liquidity
+         int128 liquidityDelta;
+         // the spacing between ticks
+-        int24 tickSpacing;
+         // used to distinguish positions of the same owner, at the same tick range
+         bytes32 salt;
+     }
+@@ -192,9 +192,9 @@ library CLPool {
+     struct SwapParams {
+         int24 tickSpacing;
+         bool zeroForOne;
+-        int256 amountSpecified;
+         uint160 sqrtPriceLimitX96;
+         uint24 lpFeeOverride;
++        int256 amountSpecified;
+     }
+ 
+     function swap(State storage self, SwapParams memory params)
+@@ -381,11 +381,11 @@ library CLPool {
+     struct UpdatePositionCache {
+         bool flippedLower;
+         bool flippedUpper;
++        uint128 maxLiquidityPerTick;
+         uint256 feeGrowthInside0X128;
+         uint256 feeGrowthInside1X128;
+         uint256 feesOwed0;
+         uint256 feesOwed1;
+-        uint128 maxLiquidityPerTick;
+     }
+ 
+     function _updatePosition(State storage self, ModifyLiquidityParams memory params, int24 tick)
