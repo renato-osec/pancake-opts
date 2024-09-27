@@ -93,7 +93,7 @@ src/pool-cl/libraries/PoolTicksCounter.sol
 
 optimized arithmetic
 
-## 8_Tick
+## 7_Tick
 
 ### repo
 
