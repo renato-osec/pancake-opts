@@ -58,21 +58,11 @@ src/pool-cl/libraries/CLPosition.sol
 
 Same as finding #1
 
-## 5_CustomRevert
+### notes
 
-### repo
+Update test/pool-cl/libraries/CLPosition.t.sol to respect new packing order
 
-pancake-v4-core
-
-### filename
-
-./src/libraries/CustomRevert.sol
-
-### summary
-
-Avoid loading fmp and write from 0x0 as we revert immediatly
-
-## 6_Pausable
+## 5_Pausable
 
 ### repo
 
@@ -85,7 +75,11 @@ src/base/Pausable.sol
 
 Use uint256 for cheaper execution gas for swap users
 
-## 7_PoolTicksCounter
+### notes
+
+Update test/Extsload.t.sol to respect new storage layout
+
+## 6_PoolTicksCounter
 
 ### repo
 
@@ -111,26 +105,4 @@ src/pool-cl/libraries/Tick.sol
 
 ### summary
 
-Remove unneeded and
-
-## 9_Tick
-
-### repo
-
-pancake-v4-core
-
-### filename
-
-src/pool-cl/libraries/Tick.sol
-
-### summary
-
 Minor arithmetic hack
-
-
-
-
-
-
-
-
